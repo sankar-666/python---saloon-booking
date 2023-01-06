@@ -1,4 +1,4 @@
-{% include 'adminheader.html' %}
+{% include 'staffheader.html' %}
 <div class="img-div">
 <center>
     
@@ -27,7 +27,7 @@
             <td>{{ row['c_pin'] }}</td>
             <td>{{ row['datetime'] }}</td>
             <td>{{ row['bookingmaster_status'] }}</td>
-            <td><a class="btn btn-success" href="adminviewpayment?bmid={{ row['bookingmaster_id'] }}">View payment</a></td>
+            <td><a class="btn btn-success" href="staffviewpyments?bmid={{ row['bookingmaster_id'] }}">View payment</a></td>
         </tr>
         {% endfor %}
     </table>

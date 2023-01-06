@@ -259,6 +259,33 @@ def adminviewbookings():
 def adminviewpayment():
     data={}
     bmid=request.args['bmid']
-    q="SELECT * FROM payment where bookingmaster_id='%s'"%(bmid)
+    q="SELECT * FROM payment inner join bookingmaster using (bookingmaster_id) inner join card using (card_id) where bookingmaster_id='%s'"%(bmid)
     data['res']=select(q)
     return render_template('adminviewpayment.html',data=data)
+
+
+@admin.route('/adminsalesreport',methods=['get','post'])
+def adminsalesreport():
+    data={}
+    if 'search' in request.form:
+        date1=request.form['date1']
+        # month=request.form['month']
+        cust=request.form['cust']
+        if request.form['month'] == "":
+            month=""
+        else:
+            month='%'+request.form['month']+'%'
+
+        q="""SELECT * FROM  `booking_master`, `booking_child`, `servicemanagement`, `customer` WHERE (`booking_master`.`bookingmaster_id`=`booking_child`.`bookingmaster_id` AND `booking_child`.`service_id`=`servicemanagement`.`service_id` AND `booking_master`.`customer_id`=`customer`.`customer_id` AND  c_fname LIKE '%s') 
+            OR
+            (`booking_master`.`bookingmaster_id`=`booking_child`.`bookingmaster_id` AND `booking_child`.`service_id`=`servicemanagement`.`service_id` AND `booking_master`.`customer_id`=`customer`.`customer_id` AND  `datetime` LIKE '%s')
+            OR
+            (`booking_master`.`bookingmaster_id`=`booking_child`.`bookingmaster_id` AND `booking_child`.`service_id`=`servicemanagement`.`service_id` AND `booking_master`.`customer_id`=`customer`.`customer_id` AND  `datetime` LIKE '%s')"""%(cust,date1,month)
+        print(q)
+    else:
+        q="SELECT * FROM  `booking_master`, `booking_child`, `servicemanagement`, `customer` WHERE `booking_master`.`bookingmaster_id`=`booking_child`.`bookingmaster_id` AND `booking_child`.`service_id`=`servicemanagement`.`service_id` AND `booking_master`.`customer_id`=`customer`.`customer_id`"
+    data['res']=select(q)
+    
+    return render_template('adminsalesreport.html',data=data)
+
+    

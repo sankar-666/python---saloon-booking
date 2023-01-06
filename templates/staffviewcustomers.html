@@ -1,33 +1,38 @@
-{% include 'adminheader.html' %}
+{% include 'staffheader.html' %}
 <div class="img-div">
 <center>
     
     <table class="table-striped table tbl-new" style="background: white;box-shadow: 5px 2px 10px lightgray;border-radius: 10px;">
             <tr>
 
-                <td colspan="6" align="center"><h3>View Bookings</h3></td>
+                <td colspan="6" align="center"><h3>View users</h3></td>
             </tr>
 
         <tr>
-            <th>Service</th>
+    
             <th>Customer Name</th>
             <th>Customer Phone</th>
             <th>Customer City</th>
             <th>Customer pincode</th>
-            <th>Date</th>
+      
+            <th>District</th>
+            <th>Dob</th>
             <th>Status</th>
           
         </tr>
         {% for row in data['res'] %}
         <tr>
-            <td>{{ row['service_name'] }}</td>
+          
             <td>{{ row['c_fname'] }}{{ row['c_lname'] }}</td>
             <td>{{ row['c_phone'] }}</td>
             <td>{{ row['c_city'] }}</td>
             <td>{{ row['c_pin'] }}</td>
-            <td>{{ row['datetime'] }}</td>
-            <td>{{ row['bookingmaster_status'] }}</td>
-            <td><a class="btn btn-success" href="adminviewpayment?bmid={{ row['bookingmaster_id'] }}">View payment</a></td>
+      
+            <td>{{ row['c_district'] }}</td>
+            <td>{{ row['c_dob'] }}</td>
+            <td>{{ row['c_status'] }}</td>
+            <td><a class="btn btn-info" onclick="return confirm('Are You Sure!')" href="?action=active&cid={{ row['customer_id'] }}&uname={{ row['username'] }}">Active</a></td>
+            <td><a class="btn btn-danger" onclick="return confirm('Are You Sure!')" href="?action=inactive&cid={{ row['customer_id'] }}&uname={{ row['username'] }}">Inactive</a></td>
         </tr>
         {% endfor %}
     </table>

@@ -1,15 +1,35 @@
 {% include 'adminheader.html' %}
 <div class="img-div">
 <center>
+<br><br>
+    <div>
+        <form action="" method="post">
+        <div>
+            <label for="">Date</label>
+            <input type="date" name="date1" id="">
+        </div>
+        <div>
+            <label for="">Month</label>
+            <input type="month" name="month" id="">
+        </div>
+        <div>
+            <label for="">Customer</label>
+            <input type="text" name="cust" id="">
+        </div>
+        <div>
+            <input type="submit" value="search" name="search" id="">
+        </div>
+        </form>
+    </div>
     
-    <table class="table-striped table tbl-new" style="background: white;box-shadow: 5px 2px 10px lightgray;border-radius: 10px;">
+    <table class="table-striped table tbl-new" style="background: white;box-shadow: 5px 2px 10px lightgray;border-radius: 10px;width: 1000px;">
             <tr>
 
-                <td colspan="6" align="center"><h3>View Bookings</h3></td>
+                <td colspan="6" align="center"><h3>report</h3></td>
             </tr>
 
         <tr>
-            <th>Service</th>
+            <th>Serice</th>
             <th>Customer Name</th>
             <th>Customer Phone</th>
             <th>Customer City</th>
@@ -27,7 +47,7 @@
             <td>{{ row['c_pin'] }}</td>
             <td>{{ row['datetime'] }}</td>
             <td>{{ row['bookingmaster_status'] }}</td>
-            <td><a class="btn btn-success" href="adminviewpayment?bmid={{ row['bookingmaster_id'] }}">View payment</a></td>
+            
         </tr>
         {% endfor %}
     </table>
