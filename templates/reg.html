@@ -1,0 +1,166 @@
+{% include 'publicheader.html' %}
+
+
+<center>
+
+
+<div >
+    <form  id="reg" action="" method="post">
+    <h1 class="p-3">Registration</h1>
+
+    <div class="reg-container">
+            <div>
+                <input type="email" class="form-control" required placeholder="Email" name="email" id="email">
+            </div>
+             
+            <div>
+                <input type="password" class="form-control" required placeholder="Password" name="passw" id="password">
+            </div>
+    </div>
+    <div class="reg-container">
+            <div>
+                <input type="text" class="form-control" required placeholder="First name" name="fname" id="">
+            </div>
+            <div>
+                <input type="text" class="form-control" required placeholder="Last Name" name="lname" id="">
+            </div>
+    </div>
+    <div class="reg-container">
+            <div>
+                <input type="text" class="form-control" required placeholder="House name" name="housename" id="">
+            </div>
+           
+    </div>
+    <div class="reg-container">
+            <div>
+                <input type="text" class="form-control" required placeholder="City" name="city" id="">
+            </div>
+            <div>
+                <input type="text" class="form-control" required placeholder="District" name="district" id="">
+            </div>
+    </div>
+    <div class="reg-container">
+            <div>
+                <input type="text" class="form-control" required placeholder="Pincode" maxlength="6" name="pincode" id="">
+            </div>
+            <div>
+                <input type="text" class="form-control" required placeholder="Phone" maxlength="10" name="phone" id="">
+            </div>
+    </div>
+    <div class="reg-container">
+            <div>
+                <input style="height: 20px;border: 1px solid rgb(205, 205, 205);padding: 22px 80px;" type="date" required placeholder="Dob" name="dob" id="">
+            </div>
+    </div>
+    <div class="reg-container">
+        <input id="reg-btn" type="submit" name="btn" >
+    </div>
+    </form>
+</div>
+
+</center>
+
+
+<script src="
+https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+    </script>
+<script>
+    $(function() {
+        $("input[name='fname']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+
+        });
+        $("input[name='lname']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+
+        });
+        // $("input[name='dob']").on('input', function(e) {
+        //     $(this).val($(this).val().replace(/[^0-9/]/g, ''));
+
+        // });
+        
+        $("input[name='phone']").on('input', function(e) {
+        	$(this).val($(this).val().replace(/[^0-9]/g, ''));
+            
+        });
+        $("input[name='pin']").on('input', function(e) {
+        	$(this).val($(this).val().replace(/[^0-9]/g, ''));
+            
+        });
+        $("input[name='email']").on('input', function(e) {
+              var re = /([A-Z0-9a-z_-][^@])+?@[^$#<>?]+?\.[\w]{1,}/.test(this.value);
+                if(!re) {
+                    $('#eerror').show();
+                } else {
+                    $('#eerror').hide();
+                }
+
+        });
+        $("input[name='address']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z0-9()/. ]/g, ''));
+
+        });
+        $("input[name='place']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+
+        });
+            
+        $("input[name='pwd']").on('input', function(e) {
+        	$(this).val($(this).val().replace(/[^0-9A-Za-z@/. ]/g, ''));
+            
+        });
+    });
+
+    document.getElementById("unamespan").style.visibility="hidden"
+
+    document.getElementById("email").addEventListener("input",validateEmail)
+
+    function validateEmail() {
+        // alert("hai")
+        let email = document.getElementById("email").value
+        var val = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+        if (val) {
+          console.log('Valid email');
+          document.getElementById("unamespan").style.visibility="hidden"
+          document.getElementById('reg-btn').disabled = false;
+          
+            } else {
+              console.log('Invalid email');
+              document.getElementById("unamespan").style.visibility="visible"
+              document.getElementById('reg-btn').disabled = true;
+        
+            }
+
+      }
+
+
+
+      document.getElementById("passspan").style.display="none"
+
+      document.getElementById("password").addEventListener("input",validatePassword)
+
+    function validatePassword() {
+        // alert("hai")
+        let password = document.getElementById("password").value
+        var val = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(password);
+
+        if (val) {
+          console.log('Valid pass');
+          document.getElementById("passspan").style.display="none"
+          document.getElementById('reg-btn').disabled = false;
+          
+            } else {
+              console.log('Invalid pass');
+              document.getElementById("passspan").style.display="block"
+              document.getElementById('reg-btn').disabled = true;
+        
+            }
+
+      }
+   
+
+
+
+  </script>
+{% include 'footer.html' %}

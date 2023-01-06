@@ -1,0 +1,37 @@
+{% include 'adminheader.html' %}
+<div class="img-div">
+<center>
+    
+    <table class="table-striped table tbl-new" style="background: white;box-shadow: 5px 2px 10px lightgray;border-radius: 10px;">
+            <tr>
+
+                <td colspan="6" align="center"><h3>View Bookings</h3></td>
+            </tr>
+
+        <tr>
+            <th>Serive</th>
+            <th>Customer Name</th>
+            <th>Customer Phone</th>
+            <th>Customer City</th>
+            <th>Customer pincode</th>
+            <th>Date</th>
+            <th>Status</th>
+          
+        </tr>
+        {% for row in data['res'] %}
+        <tr>
+            <td>{{ row['service_name'] }}</td>
+            <td>{{ row['c_fname'] }}{{ row['c_lname'] }}</td>
+            <td>{{ row['c_phone'] }}</td>
+            <td>{{ row['c_city'] }}</td>
+            <td>{{ row['c_pin'] }}</td>
+            <td>{{ row['datetime'] }}</td>
+            <td>{{ row['bookingmaster_status'] }}</td>
+            <td><a class="btn btn-success" href="adminviewpayment?bmid={{ row['bookingmaster_id'] }}">View payment</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+</center>
+
+{% include 'footer.html' %}

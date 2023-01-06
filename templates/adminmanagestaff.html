@@ -1,0 +1,289 @@
+{% include 'adminheader.html' %}
+
+
+<center>
+    <div class="img-div">
+        {% if data['staff'] %}
+    
+        
+        <form id="reg" style="background: rgba(0, 0, 0, .1);box-shadow: 10px 10px 8px lightgrey" action="" method="post">
+            <h3 class="p-3 text-white">Update Staff</h3>
+    
+            <div class="reg-container">
+                    <div>
+                        <input type="text" class="form-control" value="{{ data['staff'][0]['s_fname'] }}" required placeholder="Firstname" name="fname" id="">
+                    </div>
+                    <div>
+                        <input type="text" class="form-control" value="{{ data['staff'][0]['s_lname'] }}" required placeholder="Lastname" name="lname" id="">
+                    </div>
+            </div>
+            
+            <div class="reg-container">
+                    <div style="margin-left: 32px;">
+                        <input  type="text" class="form-control" value="{{ data['staff'][0]['s_city'] }}" required placeholder="City" name="city" id="">
+                    </div>
+                    <div>
+                        <input type="text" class="form-control" value="{{ data['staff'][0]['s_district'] }}" required placeholder="District" name="district" id="">
+                    </div>
+                    <div style="margin-right: 32px;">
+                        <input type="text" class="form-control" value="{{ data['staff'][0]['s_housename'] }}" required placeholder="housename" name="housename" id="">
+                    </div>
+            </div>
+    
+            <div class="reg-container">
+                    <div>
+                        <input type="text" class="form-control" maxlength="6" value="{{ data['staff'][0]['s_pin'] }}" required placeholder="Pincode" name="pin" id="">
+                    </div>
+                    <div>
+                        <input type="text" class="form-control" maxlength="10" value="{{ data['staff'][0]['s_phone'] }}" required placeholder="phone" name="phone" id="">
+                    </div>
+             </div>
+            
+             <div class="reg-container">
+                    <div >
+                         <select name="gender" required style="padding: 10px 130px;border: 1px solid lightgrey;color: rgb(120, 120, 120);" class="form-select" aria-label="Default select example">
+                           {% if data['staff'][0]['s_gender']=="male" %}
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                            {% elif data['staff'][0]['s_gender']=="female" %}
+                            <option value="female">Female</option>
+                            <option value="male">Male</option>
+                            <option value="other">Other</option>
+                            {% elif data['staff'][0]['s_gender']=="other" %}
+                            <option value="other">Other</option>
+                            <option value="female">Female</option>
+                            <option value="male">Male</option>
+                            
+                            {% endif %}
+                          </select>
+                    </div>
+                    <div >
+                        <!-- <label for="">Date of Birth: </label> -->
+                        <input style="height: 20px;border: 1px solid rgb(205, 205, 205);padding: 22px 80px;" type="date" value="{{ data['staff'][0]['s_dob'] }}" required placeholder="Date of Birth" name="dob" id="">
+                    </div>
+             </div>
+             <div>
+                <input id="reg-btn" style="color: #fff;margin-bottom: 1rem;border: none;outline: none;" type="submit" value="Update" name="update">
+             </div>
+    
+        </form>
+
+        {% else %}
+
+         
+        <form action="" id="reg" style="background: rgba(0, 0, 0, .1);box-shadow: 10px 10px 8px lightgrey" method="post">
+            <h3 class="p-3 text-white">Manage Staff</h3>
+            <!-- <div style="display: flex;position: relative;top: 15px;" >
+               
+                <span style="padding-left: 50px;font-size: .8em;color: rgb(255, 0, 0);" id="unamespan">Incorrect email format!</span>
+          
+                <span  style="padding-left: 170px;font-size: .8em;color: red;" id="passspan">Password Must contain  8 charactor, 1 lowercase, 1 uppercase, 1 number!</span>
+            
+            </div> -->
+    
+            <div class="reg-container">
+                    <div>
+                        <input type="text" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required placeholder="Email" name="email" id="email">
+                    </div>
+                    <div>
+                        <input type="password" class="form-control" required placeholder="Password" name="password" id="password">
+                    </div>
+            </div>
+            <div class="reg-container">
+                    <div>
+                        <input type="text" class="form-control" required placeholder="Firstname" name="fname" id="">
+                    </div>
+                    <div>
+                        <input type="text" class="form-control" required placeholder="Lastname" name="lname" id="">
+                    </div>
+            </div>
+      
+            <div class="reg-container">
+                    <div style="margin-left: 32px;">
+                        <input type="text" class="form-control" required placeholder="City" name="city" id="">
+                    </div>
+                    <div>
+                        <input type="text" class="form-control" required placeholder="District" name="district" id="">
+                    </div>
+                    <div style="margin-right: 30px;">
+                        <input type="text" class="form-control" required placeholder="housename" name="housename" id="">
+                    </div>
+            </div>
+    
+            <div class="reg-container">
+                    <div>
+                        <input type="text" class="form-control"  maxlength="6" required placeholder="Pincode" name="pin" id="">
+                    </div>
+                    <div>
+                        <input type="text" class="form-control" maxlength="10" required placeholder="phone" name="phone" id="">
+                    </div>
+             </div>
+            
+             <div class="reg-container">
+                    <div>
+                            <select name="gender" required style="padding: 10px 70px;border: 1px solid lightgrey;color: rgb(120, 120, 120);" class="form-select" aria-label="Default select example">
+                                <option selected>Click to select gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>   </div>
+                 
+                        <div>
+                            <input style="height: 20px;border: 1px solid rgb(205, 205, 205);padding: 22px 80px;" type="date" required placeholder="Dob" name="dob" id="">
+                        </div>       
+             </div>
+             <div >
+                <input id="reg-btn" style="color: #fff;margin-bottom: 1rem;border: none;outline: none;" type="submit" value="submit" name="submit">
+             </div>
+            </div>
+        </form>
+    
+        {% endif %}
+    
+        </div>
+        <br><br>
+
+    <h5>View Available Staffs</h5>
+    <table class="table table-striped tbl-new">
+        <tr>
+            <th>Name</th>
+            <th>Staff Join</th>
+            <th>City</th>
+            <th>District</th>
+            <th>Pincode</th>
+            <th>Phone</th>
+            <th>Gender</th>
+            <th>Dob</th>
+            <th>Staff Status</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        {% for row in data['res'] %}
+        <tr>
+            <td>{{ row['s_fname'] }}{{ row['s_lname'] }}</td>
+            <td>{{ row['s_joindate'] }}</td>
+
+            <td>{{ row['s_city'] }}</td>
+            <td>{{ row['s_district'] }}</td>
+            <td>{{ row['s_pin'] }}</td>
+            <td>{{ row['s_phone'] }}</td>
+            <td>{{ row['s_gender'] }}</td>
+            <td>{{ row['s_dob'] }}</td>
+            <td>{{ row['s_status'] }}</td>
+            <td><a class="btn btn-info" href="?action=update&stid={{ row['staff_id'] }}&uname={{ row['username'] }}">Update</a></td>
+            <td><a class="btn btn-success" onclick="return confirm('Are You Sure!')" href="?action=active&stid={{ row['staff_id'] }}&uname={{ row['username'] }}">Active</a></td>
+            <td><a class="btn btn-danger" onclick="return confirm('Are You Sure!')" href="?action=inactive&stid={{ row['staff_id'] }}&uname={{ row['username'] }}">Inactive</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</center>
+
+<script src="
+https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+    </script>
+<script>
+    $(function() {
+        $("input[name='fname']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+
+        });
+        $("input[name='lname']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+
+        });
+        // $("input[name='dob']").on('input', function(e) {
+        //     $(this).val($(this).val().replace(/[^0-9/]/g, ''));
+
+        // });
+        
+        $("input[name='phone']").on('input', function(e) {
+        	$(this).val($(this).val().replace(/[^0-9]/g, ''));
+            
+        });
+        $("input[name='pin']").on('input', function(e) {
+        	$(this).val($(this).val().replace(/[^0-9]/g, ''));
+            
+        });
+        $("input[name='email']").on('input', function(e) {
+              var re = /([A-Z0-9a-z_-][^@])+?@[^$#<>?]+?\.[\w]{1,}/.test(this.value);
+                if(!re) {
+                    $('#eerror').show();
+                } else {
+                    $('#eerror').hide();
+                }
+
+        });
+        $("input[name='address']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z0-9()/. ]/g, ''));
+
+        });
+        $("input[name='place']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+
+        });
+            
+        $("input[name='pwd']").on('input', function(e) {
+        	$(this).val($(this).val().replace(/[^0-9A-Za-z@/. ]/g, ''));
+            
+        });
+    });
+
+    document.getElementById("unamespan").style.visibility="hidden"
+
+    document.getElementById("email").addEventListener("input",validateEmail)
+
+    function validateEmail() {
+        // alert("hai")
+        let email = document.getElementById("email").value
+        var val = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+        if (val) {
+          console.log('Valid email');
+          document.getElementById("unamespan").style.visibility="hidden"
+          document.getElementById('reg-btn').disabled = false;
+          
+            } else {
+              console.log('Invalid email');
+              document.getElementById("unamespan").style.visibility="visible"
+              document.getElementById('reg-btn').disabled = true;
+        
+            }
+
+      }
+
+
+
+      document.getElementById("passspan").style.display="none"
+
+      document.getElementById("password").addEventListener("input",validatePassword)
+
+    function validatePassword() {
+        // alert("hai")
+        let password = document.getElementById("password").value
+        var val = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(password);
+
+        if (val) {
+          console.log('Valid pass');
+          document.getElementById("passspan").style.display="none"
+          document.getElementById('reg-btn').disabled = false;
+          
+            } else {
+              console.log('Invalid pass');
+              document.getElementById("passspan").style.display="block"
+              document.getElementById('reg-btn').disabled = true;
+        
+            }
+
+      }
+   
+
+
+
+  </script>
+</center>
+
+
+
+{% include 'footer.html' %}

@@ -1,0 +1,133 @@
+{% include 'adminheader.html' %}
+<center>
+    <div class="img-div">
+    {% if data['raw'] %}
+
+    
+    <form id="reg" style="padding-top: 5rem;background: rgba(0, 0, 0, .1);box-shadow: 10px 10px 8px lightgrey" action="" method="post">
+        <h3  class="p-3 text-white">Update Category</h3>
+
+        <div style="width: 50%;" class="reg-container"> 
+                
+            <input type="text" class="form-control" value="{{ data['raw'][0]['category_name'] }}" required placeholder="Category Name" name="name" id="">
+        </div>
+        <div style="width: 50%;" class="reg-container">
+                
+            <input type="text" class="form-control" value="{{ data['raw'][0]['category_desc'] }}" required placeholder="Category description" name="desc" id="">
+              
+         
+        </div>
+        
+         <div class="reg-container">
+            <input id="reg-btn" style="color: aliceblue;border:none;outline:none" type="submit" value="Update" name="update">
+         </div>
+
+    </form>
+    
+
+    {% else %}
+    
+    <form id="reg" action="" style="padding-top: 5rem;background: rgba(0, 0, 0, .1);box-shadow: 10px 10px 8px lightgrey" action="" method="post">
+        <h3  class="p-3 text-white">Manage Category</h3>
+
+        <div style="width: 50%;" class="reg-container">
+                
+            <input type="text" class="form-control" required placeholder="Category Name" name="name" id="">
+        </div>
+        <div style="width: 50%;" class="reg-container">
+                
+            <input type="text" class="form-control" required placeholder="Category description" name="desc" id="">
+              
+         
+        </div>
+        
+        
+         
+         <div class="reg-container">
+            <input id="reg-btn" style="color: aliceblue;border:none;outline:none" type="submit" value="submit" name="submit">
+         </div>
+
+    </form>
+
+    {% endif %}
+</div>
+    <br><br>
+
+    <h5>View Available Raw Materials</h5>
+    <table class="table table-striped tbl-new">
+        <tr>
+            <th>index</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Status</th>
+            
+        </tr>
+        {% for row in data['res'] %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ row['category_name'] }}</td>
+            <td>{{ row['category_desc'] }}</td>
+            <td>{{ row['category_status'] }}</td>
+           
+            <td><a class="btn btn-info" href="?action=update&cat_id={{ row['category_id'] }}">Update</a></td>
+            <td><a class="btn btn-success" onclick="return confirm('Are You Sure!')" href="?action=active&cat_id={{ row['category_id'] }}">Active</a></td>
+            <td><a class="btn btn-danger" onclick="return confirm('Are You Sure!')" href="?action=inactive&cat_id={{ row['category_id'] }}">Inactive</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</center>
+
+<script src="
+https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+    </script>
+<script>
+    $(function() {
+        $("input[name='fname']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+
+        });
+        $("input[name='lname']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+
+        });
+        // $("input[name='dob']").on('input', function(e) {
+        //     $(this).val($(this).val().replace(/[^0-9/]/g, ''));
+
+        // });
+        
+        $("input[name='phone']").on('input', function(e) {
+        	$(this).val($(this).val().replace(/[^0-9]/g, ''));
+            
+        });
+        $("input[name='pin']").on('input', function(e) {
+        	$(this).val($(this).val().replace(/[^0-9]/g, ''));
+            
+        });
+        $("input[name='email']").on('input', function(e) {
+              var re = /([A-Z0-9a-z_-][^@])+?@[^$#<>?]+?\.[\w]{1,}/.test(this.value);
+                if(!re) {
+                    $('#eerror').show();
+                } else {
+                    $('#eerror').hide();
+                }
+
+        });
+        $("input[name='address']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z0-9()/. ]/g, ''));
+
+        });
+        $("input[name='place']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+
+        });
+            
+        $("input[name='pwd']").on('input', function(e) {
+        	$(this).val($(this).val().replace(/[^0-9A-Za-z@/. ]/g, ''));
+            
+        });
+    });
+
+
+</script>
+
+{% include 'footer.html' %}
